@@ -1,0 +1,6 @@
+--Dataset: salary_country_race
+--Source: https://www.kaggle.com/datasets/sudheerp2147234/salary-dataset-based-on-country-and-race
+--Queried Using: MySQL
+
+--Create table for salary_country_race data
+
