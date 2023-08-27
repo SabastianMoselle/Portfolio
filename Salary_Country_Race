@@ -516,7 +516,138 @@ VALUES
 (497, 'Sade', 'Bishop', 34, 'Male', 'Bachelor\'s Degree', 'Product Manager', 9, 185000, 'Canada', 'White'),
 (498, 'Shaun', 'Leach', 25, 'Female', 'Master\'s Degree', 'Data Analyst', 1, 100000, 'China', 'Korean'),
 (499, 'Skyler', 'Ring', 33, 'Male', 'PhD', 'Data Scientist', 8, 190000, 'UK', 'Mixed'),
-(500, 'Jolie', 'Galindo', 31, 'Female', 'Bachelor\'s Degree', 'Software Engineer', 6, 155000, 'USA', 'White');
+(500, 'Jolie', 'Galindo', 31, 'Female', 'Bachelor\'s Degree', 'Software Engineer', 6, 155000, 'USA', 'White')
+;
+
+
+--What is the highest salary and highest years of experience from each country?
+SELECT Country, MaxSalary, MaxExperience
+FROM (
+    SELECT Country, MAX(Salary) AS MaxSalary, MAX(YearsOfExperience) AS MaxExperience
+    FROM salary_countryandrace
+    GROUP BY Country
+) AS Results
+;
+
+
+--Classify employees in tiers based on their salary and their amount of experience, while showing the whole result set.
+SELECT
+	  ID,
+    FirstName,
+    LastName,
+    Age,
+    Gender,
+    Education,
+    JobTitle,
+    CASE
+		WHEN YearsOfExperience < 3 THEN 'Junior'
+        WHEN YearsOfExperience >= 3 AND YearsOfExperience <= 6 THEN 'Intermediate'
+        ELSE 'Senior'
+	END AS CASE_YearsOfExperience,
+    CASE
+		WHEN Salary BETWEEN 10000 AND 30000 THEN 'Low_Salary' 
+		WHEN Salary BETWEEN 30001 AND 75000 THEN 'Mid_Salary' 
+		WHEN Salary BETWEEN 75001 AND 100000 THEN 'High_Salary' 
+		WHEN Salary BETWEEN 100001 AND 500000 THEN 'Top_Salary' 
+		ELSE 'Unknown'
+    END AS CASE_Salary,
+    Country,
+    Race
+FROM salary_countryandrace
+;
+
+
+--Show the amount of employees who have a salary about the average based on their gender.
+SELECT
+	SUM(CASE WHEN Gender = 'Male' THEN 1 ELSE 0 END) AS Male_Count,
+  SUM(CASE WHEN Gender = 'Female' THEN 1 ELSE 0 END) AS Female_Count
+FROM salary_countryandrace
+WHERE Salary > (
+	SELECT 
+		AVG(Salary) 
+	FROM salary_countryandrace
+)
+;
+
+
+--What is the highest salary of each job position?
+-Before Clean Up
+SELECT
+	JobTitle,
+  MAX(Salary)
+FROM salary_countryandrace
+GROUP BY JobTitle
+ORDER BY JobTitle ASC
+;
+
+--After Clean Up
+SELECT
+	JobTitle,
+  CONCAT('$',FORMAT(MAX(Salary),2))
+FROM salary_countryandrace
+GROUP BY JobTitle
+ORDER BY JobTitle ASC
+;
+
+
+
+--Determine the highest salary, average salary, and the lowest salary in each country.
+--Before Clean Up
+SELECT
+	Country,
+    Max_Salary,
+    Average_Salary,
+    Min_Salary
+FROM (
+	SELECT
+		Country,
+		MAX(Salary) AS Max_Salary,
+        AVG(Salary) AS Average_Salary,
+        MIN(Salary) AS Min_Salary
+	FROM salary_countryandrace
+    GROUP BY Country
+) AS Sub
+
+--After Clean Up
+SELECT
+	Country,
+    Max_Salary,
+    Average_Salary,
+    Min_Salary
+FROM (
+	SELECT
+		Country,
+		CONCAT('$',FORMAT(MAX(Salary),2)) AS Max_Salary,
+        CONCAT('$',FORMAT(ROUND(AVG(Salary),2),2)) AS Average_Salary,
+        CONCAT('$',FORMAT(MIN(Salary),2)) AS Min_Salary
+	FROM salary_countryandrace
+    GROUP BY Country
+) AS Sub
+
+
+--Retrieve the details of employees whose salary is above the average salary in the company.
+SELECT
+	*
+FROM (
+	SELECT
+		*
+	FROM salary_countryandrace
+    WHERE Salary > (
+		SELECT
+			AVG(Salary)
+		FROM salary_countryandrace
+        )
+	) AS Sub 
+
+
+--Group employees by education level and gender, and calculate the count of employees in each group.
+SELECT
+	Education,
+    Gender,
+    COUNT(Gender) AS NumberOfEmployees
+FROM salary_countryandrace
+GROUP BY Education, Gender
+ORDER BY Education ASC
 
 
 
