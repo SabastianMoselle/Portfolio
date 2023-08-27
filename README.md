@@ -1,3 +1,3 @@
 # SQL-Portfolio
 
-Hello! This is a showcase of my SQL skills that I have acquired during my bootcamps, certification processes and self teaching period. 
+Hello! This repository is a showcase of my SQL skills that I have acquired showcases examples of SQL I have written for solo projects and while working through SQL Courses, Bootcamps and Certifications. 
