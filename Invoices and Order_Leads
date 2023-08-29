@@ -30,9 +30,27 @@ CREATE TABLE order_leads(
 ALTER TABLE invoices
 ADD CONSTRAINT PK_invoices PRIMARY KEY (Order_ID, Meal_ID)
 
--Then, added a FOREIGN KEY constraint to Order_ID on the order_leads table
+--Then, added a FOREIGN KEY constraint to Order_ID on the order_leads table
 ALTER TABLE order_leads
 ADD FOREIGN KEY(Order_ID) REFERENCES invoices(Order_ID)
+
+
+--Additional clean up needed within the Date VARCHAR(60) column. Need to convert the string to a date, then change the new date value's format.
+UPDATE invoices 
+SET Date = DATE_FORMAT(STR_TO_DATE(Date, '%d-%m-%Y'), '%Y-%m-%d')
+
+--Then, change the Date column to the correct datatype.
+ALTER TABLE invoices
+MODIFY COLUMN Date DATE
+
+--Samething within the order_leads table.
+UPDATE order_leads 
+SET Date = DATE_FORMAT(STR_TO_DATE(Date, '%d-%m-%Y'), '%Y-%m-%d')
+
+--Then, change the Date column to the correct datatype.
+ALTER TABLE order_leads
+MODIFY COLUMN Date DATE
+
 
 
 
