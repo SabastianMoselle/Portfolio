@@ -1,0 +1,71 @@
+--This SQL File shows a clean up of both result sets if needed and query examples.
+--Data Source: 2 result sets from Kaggle.com
+--Table Names: invoices and order_leads
+
+--Create Table before importing:
+CREATE TABLE invoices (
+	Order_ID VARCHAR(200),
+	Date VARCHAR(60),
+    Meal_ID VARCHAR(200),
+    Company_ID VARCHAR(200),
+    Date_Of_Meal DATE,
+    Meal_Price INT,
+    Type_Of_Meal TEXT
+)
+--Made the Date column a VARCHAR because it wasn't in the correct format for the DATE datatype. However, Date_Of_Meal was in the correct format.
+
+
+CREATE TABLE order_leads(
+	Order_ID VARCHAR(200),
+    Date VARCHAR(60),
+    Company_ID VARCHAR(200),
+    Company_Name TEXT,
+    Order_Value INT,
+    Converted TINYINT
+)
+--Made the Date column a VARCHAR because it wasn't in the correct format for the DATE datatype. 
+
+
+--Added a PRIMARY KEY constraint to Order_ID and Meal_ID on the invoices table
+ALTER TABLE invoices
+ADD CONSTRAINT PK_invoices PRIMARY KEY (Order_ID, Meal_ID)
+
+-Then, added a FOREIGN KEY constraint to Order_ID on the order_leads table
+ALTER TABLE order_leads
+ADD FOREIGN KEY(Order_ID) REFERENCES invoices(Order_ID)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
