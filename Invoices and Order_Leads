@@ -72,7 +72,7 @@ INNER JOIN invoices ON invoices.Order_ID=order_leads.Order_ID
 WHERE invoices.Date BETWEEN '2014-01-01' AND  '2014-12-31'
 GROUP BY Company_Name
 
---Show the company that has the highest valued order and show to price.
+--Show the company that has the highest valued order and show the price.
 SELECT
 	Company_Name,
 	MAX(Meal_Price)
