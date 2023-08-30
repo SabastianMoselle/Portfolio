@@ -52,6 +52,17 @@ ALTER TABLE order_leads
 MODIFY COLUMN Date DATE
 
 
+--Can you gather the number of meals each company has had for each meal type?
+SELECT
+	Company_Name,
+	SUM(CASE WHEN Type_Of_Meal='Breakfast' THEN 1 ELSE 0 END) AS Breakfast_Count,
+	SUM(CASE WHEN Type_Of_Meal='Lunch' THEN 1 ELSE 0 END) AS Lunch_Count,
+    SUM(CASE WHEN Type_Of_Meal='Dinner' THEN 1 ELSE 0 END) AS Dinner_Count
+FROM order_leads
+INNER JOIN invoices ON invoices.Order_ID=order_leads.Order_ID
+GROUP BY Company_Name
+
+
 
 
 
