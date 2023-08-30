@@ -13,8 +13,6 @@ CREATE TABLE invoices (
     Type_Of_Meal TEXT
 )
 --Made the Date column a VARCHAR because it wasn't in the correct format for the DATE datatype. However, Date_Of_Meal was in the correct format.
-
-
 CREATE TABLE order_leads(
 	Order_ID VARCHAR(200),
     Date VARCHAR(60),
@@ -52,7 +50,7 @@ ALTER TABLE order_leads
 MODIFY COLUMN Date DATE
 
 
---Can you gather the number of meals each company has had for each meal type?
+--Gather the number of meals each company has had for each meal type?
 SELECT
 	Company_Name,
 	SUM(CASE WHEN Type_Of_Meal='Breakfast' THEN 1 ELSE 0 END) AS Breakfast_Count,
@@ -62,6 +60,31 @@ FROM order_leads
 INNER JOIN invoices ON invoices.Order_ID=order_leads.Order_ID
 GROUP BY Company_Name
 
+--Show how much each company has spent on every meal combined and on each type of meal in 2014?
+SELECT
+	Company_Name,
+    CONCAT('$',FORMAT(SUM(Meal_Price),2)) AS Total,
+    CONCAT('$',FORMAT(SUM(CASE WHEN Type_Of_Meal='Breakfast' THEN Meal_Price ELSE 0 END),2)) AS Breakfast_Total,
+    CONCAT('$',FORMAT(SUM(CASE WHEN Type_Of_Meal='Lunch' THEN Meal_Price ELSE 0 END),2)) AS Lunch_Total,
+    CONCAT('$',FORMAT(SUM(CASE WHEN Type_Of_Meal='Dinner' THEN Meal_Price ELSE 0 END),2)) AS Dinner_Total
+FROM order_leads
+INNER JOIN invoices ON invoices.Order_ID=order_leads.Order_ID
+WHERE invoices.Date BETWEEN '2014-01-01' AND  '2014-12-31'
+GROUP BY Company_Name
+
+--Show the company that has the highest valued order and show to price.
+SELECT
+	Company_Name,
+	MAX(Meal_Price)
+FROM order_leads
+INNER JOIN invoices ON invoices.Order_ID=order_leads.Order_ID
+WHERE Meal_Price = (
+	SELECT
+		MAX(Meal_Price)
+	FROM invoices
+)
+GROUP BY Company_Name
+    
 
 
 
