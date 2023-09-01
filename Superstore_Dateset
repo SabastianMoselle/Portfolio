@@ -1,1 +1,47 @@
+--This file shows a resultset with over +9000 rows of data.
+--RDBMS used: MySQL
 --Dataset location: https://www.kaggle.com/datasets/vivek468/superstore-dataset-final
+
+--Create table for import
+CREATE TABLE superstore_dataset (
+	RowID INT PRIMARY KEY,
+    OrderID VARCHAR(20),
+    OrderDate VARCHAR(20),
+    ShipDate VARCHAR(20),
+    ShipMode TEXT,
+    CustomerID VARCHAR(10),
+    CustomerName TEXT,
+    CustomerType TEXT,
+    Country TEXT,
+    City TEXT,
+    State TEXT,
+    PostalCode INT,
+    Region TEXT,
+    ProductID VARCHAR(30),
+    Category TEXT,
+    SubCategory TEXT,
+    ProductName VARCHAR(100),
+    Sales DECIMAL(10,2),
+    Quantity INT,
+    Discount DECIMAL(10,2),
+    Profit DECIMAL(10,2)
+    )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
