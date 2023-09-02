@@ -27,6 +27,15 @@ CREATE TABLE superstore_dataset (
     Profit DECIMAL(10,2)
     )
 
+--Find the top 10 customers with the highest profit margin gained by the store?
+SELECT
+	CustomerName,
+    SUM(Profit) AS TotalProfit
+FROM superstore_dataset
+GROUP BY CustomerName
+ORDER BY TotalProfit DESC
+LIMIT 10
+
 
 
 
