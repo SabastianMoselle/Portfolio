@@ -54,7 +54,20 @@ SELECT
 	MAX(ShipMode)
 FROM superstore_dataset
 
---
+--Calculate the average order quantity and provide insights into the distribution of order quantities.
+SELECT
+	Category,
+    SubCategory,
+    AVG(Quantity)
+FROM superstore_dataset
+GROUP BY Category, SubCategory
+
+--Show how many sales have been made from each state.
+SELECT
+	DISTINCT State,
+	COUNT(OrderID) OVER(PARTITION BY State)
+FROM superstore_dataset
+ORDER BY State ASC
 
 
 
