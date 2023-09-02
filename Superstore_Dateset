@@ -36,6 +36,27 @@ GROUP BY CustomerName
 ORDER BY TotalProfit DESC
 LIMIT 10
 
+--Find the longest time between the OrderDate and the ShipDate.
+SELECT
+      MIN(DATEDIFF(OrderDate, ShipDate)) AS Max_Between_OrderAndShip
+FROM superstore_dataset
+
+--Determine which shipping mode is used most frequently.
+SELECT
+	ShipMode,
+    COUNT(ShipMode)
+FROM superstore_dataset
+GROUP BY ShipMode
+
+	--OR
+
+SELECT
+	MAX(ShipMode)
+FROM superstore_dataset
+
+--
+
+
 
 
 
