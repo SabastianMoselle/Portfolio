@@ -48,7 +48,7 @@ SELECT
 FROM superstore_dataset
 GROUP BY ShipMode
 
-	--OR
+	OR
 
 SELECT
 	MAX(ShipMode)
@@ -56,7 +56,7 @@ FROM superstore_dataset
 
 --Calculate the average order quantity and provide insights into the distribution of order quantities.
 SELECT
-	Category,
+    Category,
     SubCategory,
     AVG(Quantity)
 FROM superstore_dataset
@@ -70,9 +70,9 @@ SELECT
       ) AS TotalOrders
 FROM superstore_dataset
 
+/*Gather the city, customer's name, sale amount, a row number for each customer within their city based on descending sales, 
+and a cumulative average of sales for each customer within their city, calculated in descending order. Clean up the data aswell.
 
---Please gather the city, customer's name, sale amount, a row number for each customer within their city based on descending sales, 
-and a cumulative average of sales for each customer within their city, calculated in descending order.
 SELECT
     City,
     CustomerName,
