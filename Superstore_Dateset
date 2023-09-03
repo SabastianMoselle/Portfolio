@@ -64,10 +64,12 @@ GROUP BY Category, SubCategory
 
 --Show how many sales have been made from each state.
 SELECT
-	DISTINCT State,
-	COUNT(OrderID) OVER(PARTITION BY State) AS TotalOrders
+      DISTINCT CustomerName,
+      COUNT(OrderID) OVER(
+	    PARTITION BY CustomerName
+      ) AS TotalOrders
 FROM superstore_dataset
-ORDER BY State ASC
+
 
 
 
