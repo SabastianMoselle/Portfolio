@@ -106,11 +106,50 @@ FROM (
 ) AS Table1
 
 
---Retrieve orders that have a ShipDate later than the corresponding OrderDate.
+--Retrieve orders that have a ShipDate later than the corresponding OrderDate. 
 SELECT
     OrderID
 FROM superstore_dataset
 WHERE OrderDate<>ShipDate
+
+
+--Retrieve the orders that were only placed in 2017. (I will be showing multiple queries that extract the same information)
+SELECT
+	OrderID,
+    CustomerName,
+    OrderDate,
+    ShipDate
+FROM superstore_dataset
+HAVING YEAR(OrderDate) ='2017'
+ORDER BY OrderDate ASC
+
+       --OR
+
+SELECT
+	OrderID,
+    CustomerName,
+    OrderDate,
+    ShipDate
+FROM superstore_dataset
+WHERE OrderDate IN (
+	SELECT
+		OrderDate
+	FROM superstore_dataset
+    WHERE OrderDate BETWEEN '2017-01-01' AND '2017-12-31'
+	)
+ORDER BY OrderDate ASC
+
+       --OR
+
+SELECT
+	OrderID,
+    CustomerName,
+    OrderDate,
+    ShipDate
+FROM superstore_dataset
+WHERE OrderDate BETWEEN '2017-01-01' AND '2017-12-31'
+ORDER BY OrderDate ASC
+
 
 
 
