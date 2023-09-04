@@ -87,7 +87,13 @@ SELECT
 	),2)) AS CumulativeAVG
 FROM superstore_dataset
 
-
+--Determine the Profit percentage for each order by calculating.
+SELECT
+    RowID,
+    CONCAT('$',Sales),
+    CONCAT('$',Profit),
+    CONCAT(ROUND((Profit/Sales)*100,2),'%') AS Profit_Percentage
+FROM superstore_dataset
 
 
 
