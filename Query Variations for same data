@@ -1,4 +1,5 @@
 --Retrieve the orders that were only placed in 2017. Used in the superstore_dataset table
+Query Variation #1:
 SELECT
 	OrderID,
     CustomerName,
@@ -8,8 +9,7 @@ FROM superstore_dataset
 HAVING YEAR(OrderDate) ='2017'
 ORDER BY OrderDate ASC
 
-       --OR
-
+Query Variation #2:
 SELECT
 	OrderID,
     CustomerName,
@@ -24,7 +24,7 @@ WHERE OrderDate IN (
 	)
 ORDER BY OrderDate ASC
 
-       --OR
+Query Variation #3:
 
 SELECT
 	OrderID,
@@ -38,6 +38,7 @@ ORDER BY OrderDate ASC
 
 
 --Find orders that were shipped on weekdays (Monday to Friday). Used in the superstore_dataset table
+Query Variation #1:
 SELECT
 	OrderID,
     ShipDate,
@@ -46,8 +47,7 @@ FROM superstore_dataset
 WHERE DAYNAME(ShipDate) <> 'Saturday' AND DAYNAME(ShipDate) <>'Sunday'
 ORDER BY ShipDate ASC
 
-       --OR
-
+Query Variation #2:
 SELECT
 	OrderID,
     ShipDate,
@@ -55,4 +55,25 @@ SELECT
 FROM superstore_dataset
 WHERE DAYNAME(ShipDate) NOT BETWEEN 'Saturday' AND 'Sunday'
 ORDER BY ShipDate ASC
+
+
+
+
+--Calculate the total sales for each month.
+Query Variation #1:
+SELECT
+	MONTHNAME(OrderDate),
+    SUM(Sales)
+FROM superstore_dataset
+GROUP BY MONTHNAME(OrderDate)
+ORDER BY SUM(Sales) ASC
+
+		
+Query Variation #2:
+SELECT
+	MONTH(OrderDate),
+    SUM(Sales)
+FROM superstore_dataset
+GROUP BY MONTH(OrderDate)
+ORDER BY 1
 
