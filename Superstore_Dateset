@@ -62,7 +62,7 @@ SELECT
 FROM superstore_dataset
 GROUP BY Category, SubCategory
 
---Show how many sales have been made from each state.
+--Show how many sales have been made from each state. (More Advanced)
 SELECT
       DISTINCT CustomerName,
       COUNT(OrderID) OVER(
@@ -71,7 +71,7 @@ SELECT
 FROM superstore_dataset
 
 /*Gather the city, customer's name, sale amount, a row number for each customer within their city based on descending sales, 
-and a cumulative average of sales for each customer within their city, calculated in descending order. Clean up the data aswell.
+and a cumulative average of sales for each customer within their city, calculated in descending order. Clean up the data aswell. (More Advanced)
 
 SELECT
     City,
