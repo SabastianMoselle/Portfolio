@@ -90,12 +90,20 @@ FROM superstore_dataset
 --Determine the Profit percentage for each order by calculating.
 SELECT
     RowID,
-    CONCAT('$',Sales),
-    CONCAT('$',Profit),
-    CONCAT(ROUND((Profit/Sales)*100,2),'%') AS Profit_Percentage
+    Sales,
+    Profit,
+    ROUND((Profit/Sales)*100,2) AS Profit_Percentage
 FROM superstore_dataset
 
-
+--Get the average Profit for orders with a Discount greater than a certain value.
+SELECT
+    (AVG(Profit),2)
+FROM (
+	SELECT
+	    Profit
+	FROM superstore_dataset
+	WHERE Discount >= 0.15
+) AS Table1
 
 
 
