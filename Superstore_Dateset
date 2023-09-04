@@ -112,6 +112,16 @@ SELECT
 FROM superstore_dataset
 WHERE OrderDate<>ShipDate
 
+--Find orders that were shipped on weekdays (Monday to Friday).
+SELECT
+	OrderID,
+    ShipDate,
+    DAYNAME(ShipDate)
+FROM superstore_dataset
+WHERE DAYNAME(ShipDate) <> 'Saturday' AND DAYNAME(ShipDate) <>'Sunday'
+ORDER BY ShipDate ASC
+
+
 
 --Retrieve the orders that were only placed in 2017. (I will be showing multiple queries that extract the same information)
 SELECT
