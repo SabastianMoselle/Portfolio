@@ -95,15 +95,22 @@ SELECT
     ROUND((Profit/Sales)*100,2) AS Profit_Percentage
 FROM superstore_dataset
 
---Get the average Profit for orders with a Discount greater than a certain value.
+--Get the average Profit for orders with a Discount greater than 0.15.
 SELECT
-    (AVG(Profit),2)
+    (AVG(Profit)
 FROM (
 	SELECT
 	    Profit
 	FROM superstore_dataset
 	WHERE Discount >= 0.15
 ) AS Table1
+
+
+--Retrieve orders that have a ShipDate later than the corresponding OrderDate.
+SELECT
+    OrderID
+FROM superstore_dataset
+WHERE OrderDate<>ShipDate
 
 
 
