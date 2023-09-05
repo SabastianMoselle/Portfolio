@@ -1,1 +1,53 @@
+--Table Name: birth_dates
+--Table Sources: Kaggle.com
+
+--Create Table for import
+CREATE TABLE birth_dates (
+	Year YEAR,
+    Month TINYINT,
+    Date_Of_Month TINYINT,
+    Day_Of_Week TINYINT,
+    Births INT
+)
+
+--What the result set currently looks like:
+Year,    Month,    Date_of_Month,     Day_of_Week,      Birth
+1994,     '1',         '1',              '6',           '8096'
+
+--How I want it to look:
+   Date,       Day_Of_Week,     Birth
+'1994-1-1',        '6',         '8096'
+
+
+--Need to format the 3 columns into a single DATE datatype column.
+SELECT
+	STR_TO_DATE(CONCAT(Year, '-', Month, '-', Date_Of_Month), '%Y-%m-%d')
+FROM birth_dates
+
+--Add a new column named 'Date'
+ALTER TABLE birth_dates
+ADD COLUMN Date DATE AFTER Births
+
+--Update birth_dates to fit the new DATE format in the new column that was just created.
+UPDATE birth_dates
+SET Date = STR_TO_DATE(CONCAT(Year,'-',Month,'-', Date_Of_Month), '%Y-%m-%d')
+
+--Create a new table to transfer Date and birth values
+CREATE TABLE birth_dates_94to97 (
+	Date DATE,
+  Day_Of_Week TINYINT,
+  Births INT
+)
+
+--Copy needed data from birth_dates to birth_dates_94to97
+INSERT INTO birth_dates_94to97(Date, Day_Of_Week, Births)
+SELECT
+	  Date,
+    Day_Of_Week,
+    Births
+FROM birth_dates
+
+--How the new table looks:
+   Date,      Day_Of_Week,     Births
+'1994-01-01',      6           '8096'
 
