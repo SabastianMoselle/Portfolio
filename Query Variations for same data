@@ -25,7 +25,6 @@ WHERE OrderDate IN (
 ORDER BY OrderDate ASC
 
 Query Variation #3:
-
 SELECT
 	OrderID,
     CustomerName,
