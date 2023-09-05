@@ -6,4 +6,4 @@ I have a clear understanding of SELECT queries with filtering, INNER and LEFT JO
 using derived tables and subqueries, string handling functions.
 Additionally, an understanding of using different query variations to get the same result!
 
-Am currently learning PARTITION BY, Window Functions and Window Frames.
+I am currently learning PARTITION BY, Window Functions and Window Frames.
