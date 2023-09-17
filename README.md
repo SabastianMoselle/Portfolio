@@ -4,7 +4,8 @@ Hello! This repository is a showcase of my SQL skills that I have acquired showc
 
 ## Highlighted Projects
 
-* **Super-Store Sales Analysis** -  [SQL](https://github.com/SabastianMoselle/SQL-Portfolio/blob/main/Superstore_Dateset): Explanation of project
+* **Birth Dates Data Clean-up** -  [SQL](https://github.com/SabastianMoselle/SQL-Portfolio/blob/main/Birth_Dates): In this project, I imported and cleaned up a kaggle dataset of births from 1994 to 1997. Using DATE_FORMAT, STR_TO_DATE, and CONCAT to combine 3 columns together making the result set easier to read, then transfering the new data to a new table with the correct columns. Going from 3 DATE columns to one DATE column in the proper format('%Y-%m-%d').
+  
 *  
 
 
