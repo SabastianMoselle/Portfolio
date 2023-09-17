@@ -1,5 +1,6 @@
 --Retrieve the orders that were only placed in 2017. Used in the superstore_dataset table
 Query Variation #1:
+
 SELECT
 	OrderID,
     CustomerName,
@@ -37,6 +38,7 @@ ORDER BY OrderDate ASC
 
 
 --Find orders that were shipped on weekdays (Monday to Friday). Used in the superstore_dataset table
+
 Query Variation #1:
 SELECT
 	OrderID,
@@ -54,7 +56,6 @@ SELECT
 FROM superstore_dataset
 WHERE DAYNAME(ShipDate) NOT BETWEEN 'Saturday' AND 'Sunday'
 ORDER BY ShipDate ASC
-
 
 
 
