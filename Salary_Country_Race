@@ -624,6 +624,30 @@ GROUP BY Education, Gender
 ORDER BY Education ASC
 
 
+/* Assess the impact of experience on salary by categorizing employees into "Highly Experienced and Well-Paid," "Moderately Experienced and Paid," and "Less Experienced and Lower Paid" and
+   investigate whether education aligns with job titles, e.g., "Bachelor's Degree Analysts," "Master's Degree Managers," or "Ph.D. Researchers.*/
+SELECT
+	FirstName,
+    LastName,
+    CASE
+		WHEN Education IS NOT NULL THEN CONCAT_WS(' ',Education, JobTitle)
+        ELSE CONCAT('Not Educated', JobTitle)
+	END AS EducJobTitle,
+    CASE
+		WHEN YearsOfExperience >= 10 AND Salary > 90000 THEN 'Highly Experienced and Well-Paid'
+        WHEN YearsOfExperience >= 10 AND Salary BETWEEN 60000 AND 89999 THEN 'Highly Experienced and Paid'
+        WHEN YearsOfExperience >= 10 AND Salary < 59999 THEN 'Highly Experienced and Under-Paid'
+        WHEN YearsOfExperience BETWEEN 5 AND 9 AND Salary > 90000 THEN 'Moderately Experienced and Well-Paid'
+        WHEN YearsOfExperience BETWEEN 5 AND 9 AND Salary BETWEEN 60000 AND 89999 THEN 'Moderately Experienced and Paid'
+        WHEN YearsOfExperience BETWEEN 5 AND 9 AND Salary < 59999 THEN 'Moderately Experienced and Under-Paid'
+        WHEN YearsOfExperience <= 4 AND Salary > 90000 THEN 'Less Experienced and Well-Paid'
+        WHEN YearsOfExperience <= 4 AND Salary BETWEEN 60000 AND 89999 THEN 'Less Experienced and Paid'
+        WHEN YearsOfExperience <= 4 AND Salary < 59999 THEN 'Less Experienced and Under-Paid'
+        ELSE 'Neither'
+	END AS GenderJobTitle
+FROM salary_countryandrace
+
+
 
 
 
