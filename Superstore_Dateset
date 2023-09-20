@@ -40,10 +40,10 @@ Top 10 Customers by Profit
 
 SELECT
     CustomerName,
-    SUM(Profit) AS TotalProfit
+    SUM(Profit) AS TotalProfitMargin
 FROM superstore_dataset
 GROUP BY CustomerName
-ORDER BY TotalProfit DESC
+ORDER BY TotalProfitMargin DESC
 LIMIT 10
 
 --------------------------
@@ -57,7 +57,7 @@ Explanation:
 ----------
 Result-Set
 --------------------------------------
-CustomerName         | TotalProfit
+CustomerName         | TotalProfitMargin
 --------------------------------------
 Tamara Chand          | 8964.48
 Raymond Buch          | 6976.09
