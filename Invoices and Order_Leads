@@ -88,7 +88,7 @@ WHERE Meal_Price = (
 --Now show the date of the highest valued order.
 SELECT
 	invoices.Date,
-	MAX(Meal_Price)
+	Meal_Price
 FROM order_leads
 INNER JOIN invoices ON invoices.Order_ID=order_leads.Order_ID
 WHERE Meal_Price = (
@@ -96,7 +96,6 @@ WHERE Meal_Price = (
 		MAX(Meal_Price)
 	FROM invoices
 )
-GROUP BY invoices.Date
     
     
 
