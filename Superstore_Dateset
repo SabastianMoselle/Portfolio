@@ -2,7 +2,10 @@
 --RDBMS used: MySQL
 --Dataset location: https://www.kaggle.com/datasets/vivek468/superstore-dataset-final
 
---Create table for import
+------------------------
+ Create table for import
+------------------------
+
 CREATE TABLE superstore_dataset (
 	RowID INT PRIMARY KEY,
     OrderID VARCHAR(20),
@@ -27,21 +30,130 @@ CREATE TABLE superstore_dataset (
     Profit DECIMAL(10,2)
     )
 
---Find the top 10 customers with the highest profit margin gained by the store?
+1.
+--------------------------
+Top 10 Customers by Profit
+--------------------------
+
+-- Find the top 10 customers with the highest profit margin gained by the store.
+
 SELECT
-	CustomerName,
+    CustomerName,
     SUM(Profit) AS TotalProfit
 FROM superstore_dataset
 GROUP BY CustomerName
 ORDER BY TotalProfit DESC
 LIMIT 10
 
+--------------------------
+
+Explanation:
+- This query retrieves the top 10 customer names and their total profits from the "superstore_dataset."
+- Results are grouped by customer name.
+- The results are sorted in descending order of total profit to identify the top-performing customers.
+- The LIMIT clause ensures that only the top 10 results are displayed.
+
+----------
+Result-Set
+--------------------------------------
+Customer Name         | Total Profit
+--------------------------------------
+Tamara Chand          | 8964.48
+Raymond Buch          | 6976.09
+Sanjit Chand          | 5757.42
+Hunter Lopez          | 5622.43
+Adrian Barton         | 5438.91
+Tom Ashbrook          | 4703.80
+Christopher Martinez  | 3899.91
+Keith Dawkins         | 3038.58
+Andy Reiter           | 2884.61
+Daniel Raglin         | 2869.08
+
+---------------------------------------
 
 
---Find the longest time between the OrderDate and the ShipDate.
+2.
+--------------------------
+Weekday vs. Weekend Orders
+--------------------------
+
+-- Categorize orders as "Weekday" or "Weekend" based on OrderDate and calculate the average sales for each category.
+
 SELECT
-      MIN(DATEDIFF(OrderDate, ShipDate)) AS Max_Between_OrderAndShip
-FROM superstore_dataset
+    WeekEndOrDay,
+    AvgSales
+FROM (
+    SELECT
+        CASE
+            WHEN DAYOFWEEK(OrderDate) IN (1, 7) THEN 'Weekend'
+            ELSE 'Weekday'
+        END AS WeekEndOrDay,
+        AVG(Sales) AS AvgSales
+    FROM superstore_dataset
+    GROUP BY WeekEndOrDay
+) AS EndOrDayTable
+
+--------------------------
+
+Explanation:
+- This query categorizes orders from the "superstore_dataset" as either "Weekday" or "Weekend" based on the OrderDate column.
+- It calculates the average sales (AvgSales) for each category, providing insights into the average sales on weekdays compared to weekends.
+- The inner subquery uses the CASE expression to categorize orders.
+- The outer query retrieves the results with the appropriate column aliases.
+
+-------------------------
+Result-Set
+--------------------------------
+Weekday   | Average Sales
+--------------------------------
+Weekday   | 239.388512
+Weekend   | 224.845025
+--------------------------------
+
+
+3.
+--------------------------------------
+Profit Percentage Calculation
+--------------------------------------
+
+-- Calculate the profit percentage for each order by rounding it to the nearest whole number and representing it as a percentage.
+
+SELECT
+    RowID,
+    Sales,
+    Profit,
+    CONCAT(ROUND((Profit/Sales)*100,0),'%') AS Profit_Percentage
+FROM superstore_dataset;
+
+--------------------------------------
+
+Explanation:
+- In this query, we calculate the profit percentage for each order in the "superstore_dataset."
+- We use the formula (Profit / Sales) * 100 to calculate the profit percentage. This formula calculates the profit as a percentage of the sales amount for each order.
+- The ROUND function is used to round the calculated percentage to the nearest whole number.
+- We use the CONCAT function to concatenate the rounded percentage value with the '%' symbol to represent it as a percentage.
+- The result set includes the RowID, Sales, Profit, and Profit_Percentage columns.
+
+------------------------
+Result Set - Has over 9000 rows, so only showing the first 10 rows.
+------------------------
+RowID   |   Sales   |   Profit   |   Profit_Percentage
+------------------------------------------------------
+1       |   261.96  |   41.91    |   16%
+2       |   731.94  |   219.58   |   30%
+3       |   14.62   |   6.87     |   47%
+4       |   957.58  |   -383.03  |   -40%
+5       |   22.37   |   2.52     |   11%
+6       |   48.86   |   14.17    |   29%
+7       |   7.28    |   1.97     |   27%
+8       |   907.15  |   90.72    |   10%
+9       |   18.50   |   5.78     |   31%
+10      |   114.90  |   34.47    |   30%
+------------------------------------------------------
+
+
+
+
 
 --Determine which shipping mode is used most frequently.
 SELECT
@@ -55,14 +167,6 @@ GROUP BY ShipMode
 SELECT
 	MAX(ShipMode)
 FROM superstore_dataset
-
---Calculate the average order quantity and provide insights into the distribution of order quantities.
-SELECT
-    Category,
-    SubCategory,
-    AVG(Quantity)
-FROM superstore_dataset
-GROUP BY Category, SubCategory
 
 --Show how many sales have been made from each state. (More Advanced)
 SELECT
@@ -89,30 +193,11 @@ SELECT
 	),2)) AS CumulativeAVG
 FROM superstore_dataset
 
---Determine the Profit percentage for each order by calculating.
-SELECT
-    RowID,
-    Sales,
-    Profit,
-    ROUND((Profit/Sales)*100,2) AS Profit_Percentage
-FROM superstore_dataset
-
---Get the average Profit for orders with a Discount greater than 0.15.
-SELECT
-    (AVG(Profit)
-FROM (
-	SELECT
-	    Profit
-	FROM superstore_dataset
-	WHERE Discount >= 0.15
-) AS Table1
 
 
---Retrieve orders that have a ShipDate later than the corresponding OrderDate. 
-SELECT
-    OrderID
-FROM superstore_dataset
-WHERE OrderDate<>ShipDate
+
+
+
 
 --Find orders that were shipped on weekdays (Monday to Friday).
 SELECT
