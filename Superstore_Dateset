@@ -30,6 +30,7 @@ CREATE TABLE superstore_dataset (
     Profit DECIMAL(10,2)
     )
 
+
 1.
 --------------------------
 Top 10 Customers by Profit
@@ -56,7 +57,7 @@ Explanation:
 ----------
 Result-Set
 --------------------------------------
-Customer Name         | Total Profit
+CustomerName         | TotalProfit
 --------------------------------------
 Tamara Chand          | 8964.48
 Raymond Buch          | 6976.09
@@ -104,7 +105,7 @@ Explanation:
 -------------------------
 Result-Set
 --------------------------------
-Weekday   | Average Sales
+WeekEndOrDay   | AvgSales
 --------------------------------
 Weekday   | 239.388512
 Weekend   | 224.845025
@@ -152,21 +153,59 @@ RowID   |   Sales   |   Profit   |   Profit_Percentage
 ------------------------------------------------------
 
 
+4.
+------------------------
+Profitable Categories
+------------------------
 
-
-
---Determine which shipping mode is used most frequently.
-SELECT
-	ShipMode,
-    COUNT(ShipMode)
-FROM superstore_dataset
-GROUP BY ShipMode
-
-	OR
+-- Find the most profitable product categories based on total profit
 
 SELECT
-	MAX(ShipMode)
+    SubCategory,
+    Category,
+    CONCAT('$', FORMAT(ROUND(SUM(Sales), 0), 1)) AS TotalSales,
+    COUNT(Quantity) AS TotalQuantity
 FROM superstore_dataset
+GROUP BY SubCategory, Category
+ORDER BY Category ASC
+
+------------------------
+
+Explanation:
+- This query identifies the most profitable product categories by calculating the total sales and the total quantity of products sold for each subcategory within a category.
+- The result includes columns for SubCategory, Category, TotalSales (formatted as currency), and TotalQuantity.
+- Data is grouped by SubCategory and Category to calculate aggregate values.
+- The results are sorted in ascending order by Category to present a clear view of profitable categories.
+
+------------------------
+Result-Set
+------------------------
+Category         | SubCategory        | TotalSales   | TotalQuantity
+---------------------------------------------------------------
+Furniture        | Bookcases          | $114,880.0    | 228
+Furniture        | Chairs             | $328,449.0    | 617
+Furniture        | Tables             | $206,966.0    | 319
+Furniture        | Furnishings        | $82,752.0     | 910
+Office Supplies  | Labels             | $12,486.0     | 364
+Office Supplies  | Storage            | $216,803.0    | 821
+Office Supplies  | Art                | $27,119.0     | 796
+Office Supplies  | Binders            | $199,906.0    | 1,433
+Office Supplies  | Appliances         | $107,532.0    | 466
+Office Supplies  | Paper              | $75,356.0     | 1,267
+Office Supplies  | Envelopes          | $15,339.0     | 246
+Office Supplies  | Fasteners          | $3,009.0      | 212
+Office Supplies  | Supplies           | $45,952.0     | 176
+Technology       | Phones             | $327,230.0    | 867
+Technology       | Accessories        | $167,380.0    | 775
+Technology       | Machines           | $189,239.0    | 115
+Technology       | Copiers            | $149,528.0    | 68
+
+---------------------------------------------------------------
+
+
+
+
+While learning PARTITION:
 
 --Show how many sales have been made from each state. (More Advanced)
 SELECT
@@ -192,71 +231,6 @@ SELECT
         ORDER BY Sales DESC ROWS UNBOUNDED PRECEDING
 	),2)) AS CumulativeAVG
 FROM superstore_dataset
-
-
-
-
-
-
-
---Find orders that were shipped on weekdays (Monday to Friday).
-SELECT
-	OrderID,
-    ShipDate,
-    DAYNAME(ShipDate)
-FROM superstore_dataset
-WHERE DAYNAME(ShipDate) <> 'Saturday' AND DAYNAME(ShipDate) <>'Sunday'
-ORDER BY ShipDate ASC
-
-       --OR
-
-SELECT
-	OrderID,
-    ShipDate,
-    DAYNAME(ShipDate)
-FROM superstore_dataset
-WHERE DAYNAME(ShipDate) NOT BETWEEN 'Saturday' AND 'Sunday'
-ORDER BY ShipDate ASC
-
-
-
---Retrieve the orders that were only placed in 2017. (I will be showing multiple queries that extract the same information)
-SELECT
-	OrderID,
-    CustomerName,
-    OrderDate,
-    ShipDate
-FROM superstore_dataset
-HAVING YEAR(OrderDate) ='2017'
-ORDER BY OrderDate ASC
-
-       --OR
-
-SELECT
-	OrderID,
-    CustomerName,
-    OrderDate,
-    ShipDate
-FROM superstore_dataset
-WHERE OrderDate IN (
-	SELECT
-		OrderDate
-	FROM superstore_dataset
-    WHERE OrderDate BETWEEN '2017-01-01' AND '2017-12-31'
-	)
-ORDER BY OrderDate ASC
-
-       --OR
-
-SELECT
-	OrderID,
-    CustomerName,
-    OrderDate,
-    ShipDate
-FROM superstore_dataset
-WHERE OrderDate BETWEEN '2017-01-01' AND '2017-12-31'
-ORDER BY OrderDate ASC
-
 
 
 
