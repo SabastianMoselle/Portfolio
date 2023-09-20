@@ -11,12 +11,18 @@ CREATE TABLE birth_dates (
 )
 
 --What the result set currently looks like:
-Year,    Month,    Date_of_Month,     Day_of_Week,      Birth
-1994,     '1',         '1',              '6',           '8096'
+-----------------------------------------------------------
+Year  | Month | Date of Month | Day of Week | Birth
+-----------------------------------------------------------
+1994  | 1     | 1             | 6           | 8096
+-----------------------------------------------------------
 
 --How I want it to look:
-   Date,       Day_Of_Week,     Birth
-'1994-1-1',        '6',         '8096'
+----------------------------------
+Date       | Day of Week | Birth
+----------------------------------
+1994-01-01 | 6           | 8096
+----------------------------------
 
 
 --Need to format the 3 columns into a single DATE datatype column.
@@ -48,6 +54,10 @@ SELECT
 FROM birth_dates
 
 --How the new table looks:
-   Date,      Day_Of_Week,     Births
-'1994-01-01',      6           '8096'
+----------------------------------
+Date       | Day of Week | Birth
+----------------------------------
+1994-01-01 | 6           | 8096
+----------------------------------
+
 
