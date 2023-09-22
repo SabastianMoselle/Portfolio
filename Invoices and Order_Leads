@@ -51,7 +51,7 @@ MODIFY COLUMN Date DATE
 
 1.
 -----------------------------------------------------------------------------------------------
-Request 2: Calculate Year-over-Year Growth
+Calculate Year-over-Year Growth
 -----------------------------------------------------------------------------------------------
 SELECT
     Year2017.Company_Name AS CompanyName,
