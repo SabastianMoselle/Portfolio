@@ -54,13 +54,13 @@ MODIFY COLUMN Date DATE
 Request 2: Calculate Year-over-Year Growth
 -----------------------------------------------------------------------------------------------
 SELECT
-	Year2017.Company_Name AS CompanyName,
+    Year2017.Company_Name AS CompanyName,
     Year2017.SumOrderValue AS 2017_OrderValue,
     Year2018.SumOrderValue AS 2018_OrderValue,
-   TRIM(LEADING '-' FROM Year2017.SumOrderValue - Year2018.SumOrderValue) AS ValueDifference
+    Year2018.SumOrderValue - Year2017.SumOrderValue AS ValueDifference
 FROM (
 	SELECT
-		Company_Name,
+	Company_Name,
         YEAR(Date_Of_Meal) AS Year,
         SUM(Order_Value) AS SumOrderValue
 	FROM invoices
@@ -71,7 +71,7 @@ FROM (
 
 JOIN (
 	SELECT
-		Company_Name,
+	Company_Name,
         YEAR(Date_Of_Meal) AS Year,
         SUM(Order_Value) AS SumOrderValue
 	FROM invoices
@@ -85,138 +85,138 @@ Explanation:
 - This query calculates the year-over-year growth in order value for each company.
 - It retrieves the total order values for each company in 2017 and 2018.
 - The result includes the company name, total order value in 2017, total order value in 2018, and the difference between the two values.
-- The TRIM(LEADING '-' FROM ...) expression is used to handle negative differences (decreases in order value).
 -----------
 Result-Set
------------
+---------------------------------------------------------------------------------
 Company Name          | 2017 Order Value | 2018 Order Value | Value Difference
 ---------------------------------------------------------------------------------
-Thirsty Idea          | 9607             | 6238             | 3369
-Overblown Pretext     | 30282            | 7344             | 22938
-Run-Of-The-Mine Bich  | 1820             | 20198            | 18378
-Elastic Manor         | 13302            | 28408            | 15106
-Funniest Enfield      | 18316            | 318              | 17998
-Distal Noses          | 5597             | 7319             | 1722
-Unstuck Lindbergh'S   | 20219            | 21538            | 1319
-Free Adventists       | 5688             | 30870            | 25182
-Kinetic Qualities     | 15729            | 8283             | 7446
-Blown-Up Remphan      | 9000             | 3310             | 5690
-Regional Art          | 26943            | 5182             | 21761
-Quaint Recollection   | 13436            | 19499            | 6063
-Three-Dimensional...  | 7607             | 10321            | 2714
-42D Tapdance          | 9924             | 18109            | 8185
-Octagonal Station'S   | 6714             | 9409             | 2695
-Aristocratic Stranger | 19104            | 13891            | 5213
-Pornographic Snips    | 8030             | 14234            | 6204
-Regrettable Onslaught | 7557             | 442              | 7115
-Unimportant Mullen    | 6902             | 14514            | 7612
-Spear-Throwing...     | 17631            | 25404            | 7773
-Composite Broadcasting| 12286            | 8934             | 3352
-Edgy Pitchers         | 5366             | 28241            | 22875
-Athletic Paper        | 6589             | 7284             | 695
-Brown Ambiguities     | 8475             | 23366            | 14891
-Excitatory Affects    | 13302            | 29929            | 16627
-Alike Odors           | 4613             | 12179            | 7566
-Handmade Wisman       | 13439            | 7654             | 5785
-Sweet-Sour...         | 8760             | 10587            | 1827
-Protoplasmic Docherty | 7489             | 19130            | 11641
-Half-Digested Podgers | 7264             | 8869             | 1605
-Pro-U.N.F.P. Forecast | 1835             | 9997             | 8162
-Easiest Furnishing    | 3117             | 15934            | 12817
-Archeological Purists | 5013             | 3555             | 1458
-Twenty-Page...        | 1546             | 6952             | 5406
-Biophysical...        | 14282            | 4088             | 10194
-Simple-Seeming Tenure | 12205            | 15868            | 3663
-World-Oriented...     | 5156             | 21825            | 16669
-Super Grab            | 3971             | 11977            | 8006
-Calm Rabble           | 8146             | 7153             | 993
-Dire Chamber          | 11210            | 5605             | 5605
-Varian Ointment       | 10307            | 4701             | 5606
-Self-Deluded Thuds    | 2762             | 15556            | 12794
-Passionate Brink      | 3241             | 16896            | 13655
-Transluscent...       | 13307            | 9244             | 4063
-Tangential Sheds      | 25669            | 3438             | 22231
-Victorian Aim         | 4222             | 17198            | 12976
-Unconditional Bestes  | 26700            | 3839             | 22861
-Three-Men-And-A-...  | 9188             | 17627            | 8439
-Infamous Inoculation  | 5386             | 7328             | 1942
-Razor-Sharp Guests    | 18871            | 1232             | 17639
-Even-Handed...        | 15146            | 9488             | 5658
-Mono-Unsaturated...   | 4810             | 2509             | 2301
-Hundredth Sabella     | 15544            | 13725            | 1819
-Testicular...         | 15065            | 16577            | 1512
-Attractive Fritzie'S  | 10763            | 14053            | 3290
-Acid-Fast Constraint  | 12955            | 32004            | 19049
-Flimsy Rush           | 3819             | 17516            | 13697
-Imitative Beverage    | 469              | 15810            | 15341
-Fast-Firing $10,000   | 6058             | 7922             | 1864
-Priestly Item-Categories | 9364          | 12863            | 3499
-Thirty-Year Wrinkles  | 957              | 14311            | 13354
-State-Local Minstrel  | 16709            | 547              | 16162
-Megakaryocytic...     | 19511            | 8724             | 10787
-Hindmost Pretender    | 21133            | 17838            | 3295
-Snazzy Amendment      | 10879            | 26306            | 15427
-Scientific Clint      | 27322            | 9922             | 17400
-Constant Commonwealth | 6130             | 15244            | 9114
-Long-Established...   | 16338            | 21415            | 5077
-Scandinavian...       | 4578             | 4920             | 342
-Big-Large X-Rays      | 2871             | 6854             | 3983
-37Th Clean            | 5215             | 10323            | 5108
-Injunctive Hookworm   | 14785            | 9821             | 4964
-Firmer Abyssinians    | 25943            | 5985             | 19958
-Surreptitious Puppy   | 6788             | 4898             | 1890
-Genteel Facility      | 20465            | 12860            | 7605
-Unasterisked Formby'S | 13313            | 12448            | 865
-Cerebral Doc          | 8800             | 6229             | 2571
-Industrial Opinions   | 25404            | 29431            | 4027
-Ergotropic Lucretia   | 12706            | 9771             | 2935
-Wide-Open Bo'Sun'S    | 9053             | 9331             | 278
-Fat-Soluble Symphony  | 2339             | 16104            | 13765
-Editorial Paintbrush  | 7544             | 6920             | 624
-Aggressive Richey     | 5216             | 8523             | 3307
-Godless Soybean       | 19888            | 946              | 18942
-Drier Cicognani       | 7391             | 10378            | 2987
-Wild Arts             | 18111            | 17215            | 896
-Atlantic Dining       | 3733             | 10275            | 6542
-Abdominal Nw          | 12369            | 9384             | 2985
-Experienced...        | 7596             | 15235            | 7639
-Sharp-Limbed...       | 9261             | 39491            | 30230
-All-Woman Stock       | 2769             | 978              | 1791
-Unconcerned...        | 20020            | 5734             | 14286
-Gowned Kabalevsky     | 3591             | 14291            | 10700
-Sonic Longhorn        | 13242            | 6319             | 6923
-Unshielded Offender   | 3022             | 5341             | 2319
-Fatherly Meq          | 7644             | 18399            | 10755
-Serious-Minded Weld   | 13086            | 5552             | 7534
-Dandy Fist            | 16894            | 16687            | 207
-Unconcerned Waite     | 15984            | 14958            | 1026
-Two-Mile Grab         | 6362             | 4565             | 1797
-Dystopian G-P         | 9362             | 6915             | 2447
-Garish Bishopsgate    | 4850             | 6962             | 2112
-Unhesitant Capercailzie | 5439          | 9342             | 3903
-Painteresque Burial   | 22425            | 5156             | 17269
-Fierce One-Fifth      | 7609             | 3600             | 4009
-Atune Endowment       | 17308            | 9136             | 8172
-Non-Dissonant...      | 16296            | 4160             | 12136
-Nonfunctional Gauze   | 8092             | 7980             | 112
-Many-Faced Aliah      | 5166             | 6708             | 1542
-Grandiloquent...      | 8782             | 6061             | 2721
-Editorial Dinsmore    | 17612            | 12545            | 5067
-Immaculate Omen       | 2234             | 4803             | 2569
-Indelicate...         | 577              | 373              | 204
-Tenth Pandelli'S      | 7368             | 18567            | 11199
-Care-Free Arp         | 9607             | 12741            | 3134
-Wide Authorization    | 7383             | 244              | 7139
-Parametric Berra      | 24806            | 16934            | 7872
-Unseen Whip           | 4045             | 13958            | 9913
-Stormbound...         | 13284            | 1145             | 12139
-Excitatory Joint      | 19497            | 7766             | 11731
-Snob-Clannish...      | 9382             | 8611             | 771
-Thick-Walled Trimmings | 6319           | 7328             | 1009
-Good-Looking Manny    | 13285            | 3366             | 9919
-Neurotic Pavilions    | 10595            | 14046            | 3451
-Bluff Formosa         | 33520            | 5414             | 28106
-Verbal Greenwich      | 10682            | 5318             | 5364
+37Th Clean                          | 5215  | 10323 | 5108
+42D Tapdance                        | 9924  | 18109 | 8185
+Abdominal Nw                       | 12369 | 9384  | -2985
+Acid-Fast Constraint                | 12955 | 32004 | 19049
+Aggressive Richey                   | 5216  | 8523  | 3307
+Alike Odors                         | 4613  | 12179 | 7566
+All-Woman Stock                     | 2769  | 978   | -1791
+Archeological Purists               | 5013  | 3555  | -1458
+Aristocratic Stranger               | 19104 | 13891 | -5213
+Athletic Paper                      | 6589  | 7284  | 695
+Atlantic Dining                     | 3733  | 10275 | 6542
+Attractive Fritzie'S                | 10763 | 14053 | 3290
+Atune Endowment                     | 17308 | 9136  | -8172
+Big-Large X-Rays                    | 2871  | 6854  | 3983
+Biophysical Battleground            | 14282 | 4088  | -10194
+Blown-Up Remphan                    | 9000  | 3310  | -5690
+Bluff Formosa                       | 33520 | 5414  | -28106
+Brown Ambiguities                   | 8475  | 23366 | 14891
+Calm Rabble                         | 8146  | 7153  | -993
+Care-Free Arp                       | 9607  | 12741 | 3134
+Cerebral Doc                        | 8800  | 6229  | -2571
+Composite Broadcasting               | 12286 | 8934  | -3352
+Constant Commonwealth               | 6130  | 15244 | 9114
+Dandy Fist                          | 16894 | 16687 | -207
+Dire Chamber                        | 11210 | 5605  | -5605
+Distal Noses                        | 5597  | 7319  | 1722
+Drier Cicognani                     | 7391  | 10378 | 2987
+Dystopian G-P                       | 9362  | 6915  | -2447
+Easiest Furnishing                  | 3117  | 15934 | 12817
+Edgy Pitchers                       | 5366  | 28241 | 22875
+Editorial Dinsmore                  | 17612 | 12545 | -5067
+Editorial Paintbrush                | 7544  | 6920  | -624
+Elastic Manor                       | 13302 | 28408 | 15106
+Ergotropic Lucretia                 | 12706 | 9771  | -2935
+Even-Handed Dimensions              | 15146 | 9488  | -5658
+Excitatory Affects                  | 13302 | 29929 | 16627
+Excitatory Joint                    | 19497 | 7766  | -11731
+Experienced Week-Ends               | 7596  | 15235 | 7639
+Fast-Firing $10,000                 | 6058  | 7922  | 1864
+Fat-Soluble Symphony                | 2339  | 16104 | 13765
+Fatherly Meq                        | 7644  | 18399 | 10755
+Fierce One-Fifth                    | 7609  | 3600  | -4009
+Firmer Abyssinians                  | 25943 | 5985  | -19958
+Flimsy Rush                         | 3819  | 17516 | 13697
+Free Adventists                     | 5688  | 30870 | 25182
+Funniest Enfield                    | 18316 | 318   | -17998
+Garish Bishopsgate                  | 4850  | 6962  | 2112
+Genteel Facility                    | 20465 | 12860 | -7605
+Godless Soybean                     | 19888 | 946   | -18942
+Good-Looking Manny                  | 13285 | 3366  | -9919
+Gowned Kabalevsky                   | 3591  | 14291 | 10700
+Grandiloquent Flock'S               | 8782  | 6061  | -2721
+Half-Digested Podgers               | 7264  | 8869  | 1605
+Handmade Wisman                     | 13439 | 7654  | -5785
+Hindmost Pretender                  | 21133 | 17838 | -3295
+Hundredth Sabella                   | 15544 | 13725 | -1819
+Imitative Beverage                  | 469   | 15810 | 15341
+Immaculate Omen                     | 2234  | 4803  | 2569
+Indelicate Schoolchildren           | 577   | 373   | -204
+Industrial Opinions                 | 25404 | 29431 | 4027
+Infamous Inoculation                | 5386  | 7328  | 1942
+Injunctive Hookworm                 | 14785 | 9821  | -4964
+Kinetic Qualities                   | 15729 | 8283  | -7446
+Long-Established Push-Ups           | 16338 | 21415 | 5077
+Many-Faced Aliah                    | 5166  | 6708  | 1542
+Megakaryocytic Producer             | 19511 | 8724  | -10787
+Mono-Unsaturated Dickson            | 4810  | 2509  | -2301
+Neurotic Pavilions                  | 10595 | 14046 | 3451
+Non-Dissonant Building               | 16296 | 4160  | -12136
+Nonfunctional Gauze                 | 8092  | 7980  | -112
+Octagonal Station'S                 | 6714  | 9409  | 2695
+Overblown Pretext                   | 30282 | 7344  | -22938
+Painteresque Burial                 | 22425 | 5156  | -17269
+Parametric Berra                    | 24806 | 16934 | -7872
+Passionate Brink                    | 3241  | 16896 | 13655
+Pornographic Snips                  | 8030  | 14234 | 6204
+Priestly Item-Categories            | 9364  | 12863 | 3499
+Pro-U.N.F.P. Forecast               | 1835  | 9997  | 8162
+Protoplasmic Docherty               | 7489  | 19130 | 11641
+Quaint Recollection                 | 13436 | 19499 | 6063
+Razor-Sharp Guests                  | 18871 | 1232  | -17639
+Regional Art                        | 26943 | 5182  | -21761
+Regrettable Onslaught              | 7557  | 442   | -7115
+Run-Of-The-Mine Bich               | 1820  | 20198 | 18378
+Scandinavian Ethiopians             | 4578  | 4920  | 342
+Scientific Clint                    | 27322 | 9922  | -17400
+Self-Deluded Thuds                  | 2762  | 15556 | 12794
+Serious-Minded Weld                 | 13086 | 5552  | -7534
+Sharp-Limbed Stuttgart              | 9261  | 39491 | 30230
+Simple-Seeming Tenure               | 12205 | 15868 | 3663
+Snazzy Amendment                    | 10879 | 26306 | 15427
+Snob-Clannish Lighter               | 9382  | 8611  | -771
+Sonic Longhorn                      | 13242 | 6319  | -6923
+Spear-Throwing Futility             | 17631 | 25404 | 7773
+State-Local Minstrel                | 16709 | 547   | -16162
+Stormbound Lebensraum               | 13284 | 1145  | -12139
+Super Grab                          | 3971  | 11977 | 8006
+Surreptitious Puppy                 | 6788  | 4898  | -1890
+Sweet-Sour Radiopasteurization      | 8760  | 10587 | 1827
+Tangential Sheds                    | 25669 | 3438  | -22231
+Tenth Pandelli'S                    | 7368  | 18567 | 11199
+Testicular Preconditions            | 15065 | 16577 | 1512
+Thick-Walled Trimmings              | 6319  | 7328  | 1009
+Thirsty Idea                        | 9607  | 6238  | -3369
+Thirty-Year Wrinkles                | 957   | 14311 | 13354
+Three-Dimensional Biscayne           | 7607  | 10321 | 2714
+Three-Men-And-A-Helper Congo'S      | 9188  | 17627 | 8439
+Transluscent Switchgear              | 13307 | 9244  | -4063
+Twenty-Page Schubert-Beethoven-Mozart | 1546  | 6952  | 5406
+Two-Mile Grab                        | 6362  | 4565  | -1797
+Unasterisked Formby'S               | 13313 | 12448 | -865
+Unconcerned Colchicum               | 20020 | 5734  | -14286
+Unconcerned Waite                   | 15984 | 14958 | -1026
+Unconditional Bestes                | 26700 | 3839  | -22861
+Unhesitant Capercailzie             | 5439  | 9342  | 3903
+Unimportant Mullen                  | 6902  | 14514 | 7612
+Unseen Whip                         | 4045  | 13958 | 9913
+Unshielded Offender                 | 3022  | 5341  | 2319
+Unstuck Lindbergh'S                 | 20219 | 21538 | 1319
+Varian Ointment                     | 10307 | 4701  | -5606
+Verbal Greenwich                    | 10682 | 5318  | -5364
+Victorian Aim                       | 4222  | 17198 | 12976
+Wide Authorization                  | 7383  | 244   | -7139
+Wide-Open Bo'Sun'S                  | 9053  | 9331  | 278
+Wild Arts                           | 18111 | 17215 | -896
+World-Oriented Marcile              | 5156  | 21825 | 16669
+
 ---------------------------------------------------------------------------------
 
 
