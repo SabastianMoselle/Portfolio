@@ -161,8 +161,8 @@ Profitable Categories
 -- Find the most profitable product categories based on total profit
 
 SELECT
-    SubCategory,
     Category,
+    SubCategory,
     CONCAT('$', FORMAT(ROUND(SUM(Sales), 0), 1)) AS TotalSales,
     COUNT(Quantity) AS TotalQuantity
 FROM superstore_dataset
