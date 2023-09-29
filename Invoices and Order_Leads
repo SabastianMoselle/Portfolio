@@ -57,7 +57,7 @@ SELECT
     Year2017.Company_Name AS CompanyName,
     Year2017.SumOrderValue AS 2017_OrderValue,
     Year2018.SumOrderValue AS 2018_OrderValue,
-    Year2018.SumOrderValue - Year2017.SumOrderValue AS ValueDifference
+    (Year2018.SumOrderValue - Year2017.SumOrderValue) AS ValueDifference
 FROM (
 	SELECT
 	Company_Name,
