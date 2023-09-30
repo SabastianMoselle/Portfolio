@@ -5,7 +5,7 @@ Feel free to look around and [reach out](https://www.linkedin.com/in/sabastian-m
 
 ## Highlighted Projects 👨‍💻
 
-* **Birth Dates Data Clean-up and DataBase Altering/Modification** -  [SQL](https://github.com/SabastianMoselle/SQL-Portfolio/blob/main/Birth_Dates): In this project, I imported and cleaned up a kaggle dataset of births from 1994 to 1997. Using DATE_FORMAT, STR_TO_DATE, and CONCAT to combine 3 columns together making the result set easier to read, then transfering the new data to a new table with the correct columns. Going from 3 DATE columns to one DATE column in the proper format('%Y-%m-%d').
+* **Birth Dates DataBase Refactoring** -  [SQL](https://github.com/SabastianMoselle/SQL-Portfolio/blob/main/Birth_Dates): In this project, I imported and cleaned up a kaggle dataset of births from 1994 to 1997. Using DATE_FORMAT, STR_TO_DATE, and CONCAT to combine 3 columns together making the result set easier to read, then transfering the new data to a new table with the correct columns. Going from 3 DATE columns to one DATE column in the proper format('%Y-%m-%d').
   
 * **Superstore Shipping and Sales Analysis** - [SQL](https://github.com/SabastianMoselle/SQL-Portfolio/blob/main/Superstore_Dateset): In this project, I used a superstore's sales data to analyze how the weekends and weekdays differ in sale averages, calculating the profit-percentage of every sale, finding how profitable each Category is based on SubCategory sales and quantity sold, and the top 10 customers with the highest profit margin gained by the store.
   
