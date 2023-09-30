@@ -1,6 +1,6 @@
 # Portfolio
 
-Hello! This repository is a showcase of my SQL skills that I have learned and utilized on solo projects and while working through SQL Courses, Bootcamps, Certifications and other data analytics courses.
+Hello! This repository is a showcase of my SQL skills that I have learned and utilized on solo projects and while working through SQL Courses, Bootcamps, Certifications, AI resourcing, and self learning SQL.
 Feel free to look around and [reach out](https://www.linkedin.com/in/sabastian-moselle-8b5362206/) if you have any questions or feedback!
 
 ## Highlighted Projects 👨‍💻
