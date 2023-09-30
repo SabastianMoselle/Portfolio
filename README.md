@@ -9,7 +9,7 @@ Feel free to look around and [reach out](https://www.linkedin.com/in/sabastian-m
   
 * **Superstore Shipping and Sales Analysis** - [SQL](https://github.com/SabastianMoselle/SQL-Portfolio/blob/main/Superstore_Dateset): In this project, I used a superstore's sales data to analyze how the weekends and weekdays differ in sale averages, calculating the profit-percentage of every sale, finding how profitable each Category is based on SubCategory sales and quantity sold, and the top 10 customers with the highest profit margin gained by the store.
   
-* **Sales Data** - [SQL](): In this project, I focused more on Window Functions when analyzing the sales data. Using Window Functions to analyze percentage differences between the current revenue and the previous revenue, determining the individual average and the overall average for the product categorys, calculating the cumulative quantity across the months and the total quantity for each month, and more.
+* **Sales Data** - [SQL](https://github.com/SabastianMoselle/SQL-Portfolio/blob/main/Sales_Dataset): In this project, I focused more on Window Functions when analyzing the sales data. Using Window Functions to analyze percentage differences between the current revenue and the previous revenue, determining the individual average and the overall average for the product categorys, calculating the cumulative quantity across the months and the total quantity for each month, and more.
 
 
 <!-- ### Health Data Dashboard - [Tableau Dashboard](https://public.tableau.com/views/HealthcareData_16949079292280/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link)
