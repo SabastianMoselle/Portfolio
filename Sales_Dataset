@@ -2,9 +2,12 @@
 --RDBMS used: MySQL
 --Dataset location: https://www.kaggle.com
 
--- Create Table for import
+------------------------
+Create Table for import
+------------------------
+
 CREATE TABLE sales_data (
-	IndexNumber INT,
+    IndexNumber INT,
     PRIMARY KEY (IndexNumber),
     Date VARCHAR(20),
     Year YEAR,
