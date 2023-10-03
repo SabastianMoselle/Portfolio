@@ -1,1 +1,3 @@
-
+--This file shows a table with over +30000 rows of data
+--RDBMS used: MySQL
+--Dataset location: https://www.kaggle.com
