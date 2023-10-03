@@ -25,6 +25,9 @@ CREATE TABLE sales_data (
     Revenue DECIMAL(10,2)
 )
 
+-- Create a INDEX for the columns Revenue, Cost to help with calculation speed when needed.
+CREATE INDEX revenue_cost ON sales_data (Revenue, Cost)
+
 1.
 --------------------------------------
 Quantity Per Month and Across Months
