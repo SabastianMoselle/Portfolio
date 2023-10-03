@@ -24,3 +24,7 @@ CREATE TABLE sales_data (
     Cost DECIMAL(10,2),
     Revenue DECIMAL(10,2)
 )
+
+1.
+
+--Calculate the total Quantity for each Month, and also calculate the running total Quantity across months.
