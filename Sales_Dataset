@@ -64,6 +64,7 @@ Explanation:
 - The query uses multiple derived tables to calculate the monthly sum of quantities and calculates the running total quantity.
 - The "Month" column is joined with itself.
 - The "DISTINCT" statement is used to prevent duplicates from being in the result-set.
+- The "WHERE" is only searching for rows that occured only in the month of January.
 
 Only showing the month January due to the size of the result-set when including all months.
 -------------------------------------------------
