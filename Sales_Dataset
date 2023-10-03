@@ -472,7 +472,20 @@ Explanation:
 - This query calculates and ranks the average revenue of each product category between the customer being male and female from the year 2016.
 - Both derived tables are grouped by the product category, due to the aggregate function.
 - Used a SELF JOIN for "Female_Table.ProductCategory = Male_Table.ProductCategory" because they are the same values and they don't need to be repeated.
-- 
+
+-------------------------------------------------------------------
+Result-Set
+--------------------------------------------------------------------------------------------
+ProductCategory | MaleCategoryAvg | MaleProductRank | FemaleCategoryAvg | FemaleProductRank
+----------------|-----------------|-----------------|-------------------|-------------------
+    Bikes       |   1659.439902   |        1        |   1716.237938    |         1
+   Clothing     |   654.151685    |        2        |   643.816871     |         2
+  Accessories   |   351.275947    |        3        |   329.718474     |         3
+--------------------------------------------------------------------------------------------
+
+
+
+6.
 
 
 
