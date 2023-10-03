@@ -131,3 +131,90 @@ January   |         5247        |     5408
 January   |         5408        |     5408
 -------------------------------------------------
 
+
+
+2.
+--------------------------------------------------------------------------
+Average UnitPrice for Each ProductCategory and Overall ProductCategory
+--------------------------------------------------------------------------
+
+SELECT DISTINCT -- Using 'DISTINCT' to get the same result if I used 'GROUP BY'
+    PC_Table.ProductCategory,
+    PC_Table.AvgUnitPricePer,
+    AVG(UnitPrice) OVER () AS OverallAvgUnitPrice
+FROM sales_data
+
+JOIN (
+	SELECT
+	     ProductCategory,
+	     AVG(UnitPrice) AS AvgUnitPricePer
+	FROM sales_data
+	GROUP BY ProductCategory
+) AS PC_Table
+--------------------------------------------------------------------------
+
+Explanation:
+- This query calcuates the average unit price for each product category and the overall average unit price for the product category.
+- The JOIN derived table is calculating the average unit price for each product category.
+- The "DISTINCT" statement is acting as the "GROUP BY" for this result-set.
+
+---------------------------------------------------------
+Result-Set
+---------------------------------------------------------
+Category     | AvgUnitPricePer | OverallAvgUnitPrice
+---------------------------------------------------------
+Accessories  |    198.723353   |     385.514862
+Clothing     |    397.165592   |     385.514862
+Bikes        |    972.874239   |     385.514862
+---------------------------------------------------------
+
+
+
+3.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
