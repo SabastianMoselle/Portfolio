@@ -1,3 +1,23 @@
 --This file shows a table with over +30000 rows of data
 --RDBMS used: MySQL
 --Dataset location: https://www.kaggle.com
+
+-- Create Table for import
+CREATE TABLE sales_data (
+	IndexNumber INT,
+    PRIMARY KEY (IndexNumber),
+    Date VARCHAR(20),
+    Year YEAR,
+    Month VARCHAR(10),
+    CustomerAge TINYINT,
+    CustomerGender SET('M', 'F'),
+    Country VARCHAR(15),
+    State VARCHAR(15),
+    ProductCategory VARCHAR(20),
+    SubCategory VARCHAR(20),
+    Quantity TINYINT,
+    UnitCost DECIMAL(10, 2),
+    UnitPrice DECIMAL(10, 2),
+    Cost DECIMAL(10,2),
+    Revenue DECIMAL(10,2)
+)
