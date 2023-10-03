@@ -26,5 +26,108 @@ CREATE TABLE sales_data (
 )
 
 1.
+--------------------------------------
+Quantity Per Month and Across Months
+--------------------------------------
 
 --Calculate the total Quantity for each Month, and also calculate the running total Quantity across months.
+
+SELECT DISTINCT -- Using 'DISTINCT' as a duplicate filter
+	M_Table.Month,
+	C_Table.CumulativeMonthlyQuantity,
+    M_Table.Sum_Per_Month
+FROM (
+	SELECT
+		Month,
+        SUM(Quantity) AS Sum_Per_Month
+	FROM sales_data
+    GROUP BY Month
+) AS M_Table
+-- M_Table is used for calculating the Quantity Sum of each Month
+
+JOIN (
+	SELECT DISTINCT
+		Month,
+		SUM(Quantity) OVER (ORDER BY Date) AS CumulativeMonthlyQuantity
+        -- Can change the 'Date' to 'Month' to shorten the amount of rows returned
+	FROM sales_data
+) AS C_Table
+	ON C_Table.Month = M_Table.Month
+-- C_Table is used for calculating the Quantity Cumulative Sum for each Distinct Month
+--------------------------------------
+
+Explanation:
+- This query categorizes the total monthly quantity along with calculating the running total quantity across months from the "sales_data" .
+- The query uses multiple derived tables to calculate the monthly sum of quantities and calculates the running total quantity.
+- The "Month" column is joined with itself.
+- The "DISTINCT" statement is used to prevent duplicates from being in the result-set.
+
+Only showing the month January due to the size of the result-set when including all months.
+-------------------------------------------------
+Result-Set
+-------------------------------------------------
+Month     | MonthlyRunningTotal | TotalPerMonth
+-------------------------------------------------
+January   |         12          |     5408
+January   |         132         |     5408
+January   |         139         |     5408
+January   |         383         |     5408
+January   |         391         |     5408
+January   |         577         |     5408
+January   |         587         |     5408
+January   |         696         |     5408
+January   |         714         |     5408
+January   |         816         |     5408
+January   |         823         |     5408
+January   |         1008        |     5408
+January   |         1017        |     5408
+January   |         1196        |     5408
+January   |         1207        |     5408
+January   |         1383        |     5408
+January   |         1394        |     5408
+January   |         1500        |     5408
+January   |         1507        |     5408
+January   |         1728        |     5408
+January   |         1732        |     5408
+January   |         1880        |     5408
+January   |         1888        |     5408
+January   |         2059        |     5408
+January   |         2068        |     5408
+January   |         2341        |     5408
+January   |         2345        |     5408
+January   |         2481        |     5408
+January   |         2489        |     5408
+January   |         2646        |     5408
+January   |         2657        |     5408
+January   |         2801        |     5408
+January   |         2815        |     5408
+January   |         2981        |     5408
+January   |         2986        |     5408
+January   |         3159        |     5408
+January   |         3164        |     5408
+January   |         3327        |     5408
+January   |         3331        |     5408
+January   |         3502        |     5408
+January   |         3505        |     5408
+January   |         3742        |     5408
+January   |         3751        |     5408
+January   |         3915        |     5408
+January   |         3920        |     5408
+January   |         4068        |     5408
+January   |         4075        |     5408
+January   |         4249        |     5408
+January   |         4257        |     5408
+January   |         4401        |     5408
+January   |         4407        |     5408
+January   |         4532        |     5408
+January   |         4536        |     5408
+January   |         4673        |     5408
+January   |         4837        |     5408
+January   |         4850        |     5408
+January   |         5015        |     5408
+January   |         5025        |     5408
+January   |         5235        |     5408
+January   |         5247        |     5408
+January   |         5408        |     5408
+-------------------------------------------------
+
