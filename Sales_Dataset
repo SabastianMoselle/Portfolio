@@ -54,6 +54,9 @@ JOIN (
 ) AS C_Table
 	ON C_Table.Month = M_Table.Month
 -- C_Table is used for calculating the Quantity Cumulative Sum for each Distinct Month
+
+WHERE M_Table.Month = 'January'
+ORDER BY C_Table.CumulativeMonthlyQuantity ASC
 --------------------------------------
 
 Explanation:
