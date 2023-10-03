@@ -311,7 +311,7 @@ Revenue Difference Percentage
 -- Calculate the percentage of difference in the revenue from a current order and a previous order
 
 SELECT DISTINCT
-	Revenue AS CurrentRevenue,
+    Revenue AS CurrentRevenue,
     LAG(Revenue) OVER (ORDER BY Date) AS PreviousRevenue,
     ABS(ROUND((Revenue - LAG(Revenue) OVER (ORDER BY Date)) / LAG(Revenue) OVER (ORDER BY Date),2) * 100) AS PercentageDifference
 FROM sales_data
