@@ -139,7 +139,7 @@ January   |         5408        |     5408
 
 2.
 --------------------------------------------------------------------------
-Average UnitPrice for Each ProductCategory and Overall ProductCategory
+Average Unit Price for Each Product Category and Overall Product Category
 --------------------------------------------------------------------------
 
 SELECT DISTINCT -- Using 'DISTINCT' to get the same result if I used 'GROUP BY'
@@ -179,7 +179,7 @@ Bikes        |    972.874239   |     385.514862
 Customer Age Difference From Previous Customer
 ----------------------------------------------------
 
--- Calculate the difference in CustomerAge between each row and the next row
+-- Calculate the difference in Customer Age between each row and the next row
 
 SELECT
     CustomerAge,
@@ -429,7 +429,50 @@ CurrentRevenue | PreviousRevenue | PercentageDifference
     578.00     |      153.00     |       278.00
    2114.00     |      578.00     |       266.00
     57.00      |     2114.00     |        97.00
+--------------------------------------------------------
 
+
+
+5.
+-------------------------------------------------------------------
+Male and Female Average Revenue and Ranking By Product Category
+-------------------------------------------------------------------
+
+-- Retrieve the top 3 Product Categories with the highest average revenue per unit for each gender in the year 2016. 
+
+SELECT
+    Female_Table.ProductCategory AS ProductCategory,
+    Male_Table.MaleCategoryAvg AS MaleCategoryAvg,
+    RANK() OVER (ORDER BY Male_Table.MaleCategoryAvg DESC) AS MaleProductRank,
+    Female_Table.FemaleCategoryAvg AS FemaleCategoryAvg,
+    RANK() OVER (ORDER BY Female_Table.FemaleCategoryAvg DESC) AS FemaleProductRank
+FROM (
+	SELECT
+	     ProductCategory,
+	     AVG(Revenue) AS MaleCategoryAvg
+	FROM sales_data
+        WHERE CustomerGender = 'M'
+		AND Year = 2016
+        GROUP BY ProductCategory
+) AS Male_Table
+
+JOIN (
+	SELECT
+	     ProductCategory,
+	     AVG(Revenue) AS FemaleCategoryAvg
+	FROM sales_data
+        WHERE CustomerGender = 'F'
+		AND Year = 2016
+        GROUP BY ProductCategory
+) AS Female_Table
+	ON Female_Table.ProductCategory = Male_Table.ProductCategory
+-------------------------------------------------------------------
+
+Explanation:
+- This query calculates and ranks the average revenue of each product category between the customer being male and female from the year 2016.
+- Both derived tables are grouped by the product category, due to the aggregate function.
+- Used a SELF JOIN for "Female_Table.ProductCategory = Male_Table.ProductCategory" because they are the same values and they don't need to be repeated.
+- 
 
 
 
