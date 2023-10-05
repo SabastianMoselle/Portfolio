@@ -198,7 +198,7 @@ Explanation:
 - The ABS() function is being used to remove any negative signs in the result set.
 
 -----------------------------------------------------------
-Reselt-Set
+Result-Set
 -----------------------------------------------------------
     CustomerAge      |   LeadingAge  |  AgeDifference
 ---------------------|---------------|---------------------
