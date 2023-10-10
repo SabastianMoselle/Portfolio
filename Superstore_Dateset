@@ -218,7 +218,7 @@ SELECT
     RankTable.StateRank,
     sd1.Category,
     sd1.State,
-    SUM(Profit) AS TotalProfit
+    FORMAT(SUM(Profit),2) AS TotalProfit
 FROM superstore_dataset AS sd1
 JOIN (
 	SELECT
