@@ -205,32 +205,63 @@ Technology       | Copiers            | $149,528.0    | 68
 
 
 
-While learning PARTITION:
+After learning PARTITION BY, Window Functions, and Window Frames:
 
---Show how many sales have been made from each state. (More Advanced)
-SELECT
-      DISTINCT CustomerName,
-      COUNT(OrderID) OVER(
-	    PARTITION BY CustomerName
-      ) AS TotalOrders
-FROM superstore_dataset
+1.
+--------------------
+Top 5 States
+--------------------
 
-/*Gather the city, customer's name, sale amount, a row number for each customer within their city based on descending sales, 
-and a cumulative average of sales for each customer within their city, calculated in descending order. Clean up the data aswell. (More Advanced)
+-- Find the top 5 states that have the highest sales for each Product Category.
 
 SELECT
-    City,
-    CustomerName,
-    CONCAT('$',ROUND(Sales,2)) AS Sales,
-    ROW_NUMBER() OVER (
-		PARTITION BY City
-        ORDER BY Sales DESC
-	) AS RowNumber,
-    CONCAT('$',ROUND(AVG(Sales) OVER (
-		PARTITION BY City
-        ORDER BY Sales DESC ROWS UNBOUNDED PRECEDING
-	),2)) AS CumulativeAVG
-FROM superstore_dataset
+    RankTable.StateRank,
+    sd1.Category,
+    sd1.State,
+    SUM(Profit) AS TotalProfit
+FROM superstore_dataset AS sd1
+JOIN (
+	SELECT
+		RANK() OVER(PARTITION BY Category ORDER BY SUM(Profit) DESC) AS StateRank,
+        Category,
+        State
+	FROM superstore_dataset
+    GROUP BY Category, State
+) AS RankTable
+	ON RankTable.Category=sd1.Category
+		AND RankTable.State=sd1.State
+WHERE RankTable.StateRank <= 5
+GROUP BY RankTable.StateRank, sd1.State, sd1.Category
+ORDER BY sd1.Category ASC, RankTable.StateRank ASC
+------------------------------------------------------------------------------------------------------------
+
+Explanation:
+- This query uses a derived table and SELF JOINS to find the top 5 ranking of states from each Product category.
+- The RANK() Window Function is being Partitioned by each Category, so we get the subsets of each that shows the state ranks. While being in descending order of the SUM(Profit).
+- Using the WHERE Clause to only show the top 5 ranking for each Product Category.
+- Could use RANK() or ROW_NUMBER(), or DENSE_RANK().
+
+----------------
+Reseult-Set
+---------------------------------------------------------------
+StateRank | Category          | State        | TotalProfit
+---------------------------------------------------------------
+1         | Furniture          | California   | 8,495.38
+2         | Furniture          | Washington   | 7,012.07
+3         | Furniture          | New York     | 5,572.64
+4         | Furniture          | Virginia     | 5,204.34
+5         | Furniture          | Michigan     | 4,652.44
+1         | Office Supplies    | California   | 36,733.47
+2         | Office Supplies    | New York     | 25,761.76
+3         | Office Supplies    | Michigan     | 14,910.19
+4         | Office Supplies    | Washington   | 10,947.88
+5         | Office Supplies    | Georgia      | 9,782.21
+1         | Technology         | New York     | 42,142.66
+2         | Technology         | California   | 29,433.86
+3         | Technology         | Washington   | 15,010.98
+4         | Technology         | Indiana      | 10,994.18
+5         | Technology         | Virginia     | 7,251.28
+---------------------------------------------------------------
 
 
 
