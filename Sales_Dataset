@@ -70,7 +70,7 @@ Explanation:
 - The "WHERE" is only searching for rows that occured only in the month of January.
 
 Only showing the month January due to the size of the result-set when including all months.
--------------------------------------------------
+------------
 Result-Set
 -------------------------------------------------
 Month     | MonthlyRunningTotal | TotalPerMonth
@@ -165,7 +165,7 @@ Explanation:
 - The JOIN derived table is calculating the average unit price for each product category.
 - The "DISTINCT" statement is acting as the "GROUP BY" for this result-set.
 
----------------------------------------------------------
+------------
 Result-Set
 ---------------------------------------------------------
 Category     | AvgUnitPricePer | OverallAvgUnitPrice
@@ -197,7 +197,7 @@ Explanation:
 - The CustomerAge window function is ordered by Date.
 - The ABS() function is being used to remove any negative signs in the result set.
 
------------------------------------------------------------
+-------------
 Result-Set
 -----------------------------------------------------------
     CustomerAge      |   LeadingAge  |  AgeDifference
@@ -327,7 +327,7 @@ Explanation:
 - Limiting to only 100 rows due to the size of the total result-set, which is exactly 32,139 rows.
 - The ABS() function is used to remove the negative sign or turning the value into an absolute value.
 
---------------------------------
+-------------
 Result-Set
 --------------------------------------------------------
 CurrentRevenue | PreviousRevenue | PercentageDifference
@@ -476,7 +476,7 @@ Explanation:
 - Both derived tables are grouped by the product category, due to the aggregate function.
 - Used a SELF JOIN for "Female_Table.ProductCategory = Male_Table.ProductCategory" because they are the same values and they don't need to be repeated.
 
--------------------------------------------------------------------
+--------------
 Result-Set
 --------------------------------------------------------------------------------------------
 ProductCategory | MaleCategoryAvg | MaleProductRank | FemaleCategoryAvg | FemaleProductRank
