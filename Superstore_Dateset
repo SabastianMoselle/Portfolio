@@ -263,6 +263,63 @@ StateRank | Category          | State        | TotalProfit
 5         | Technology         | Virginia     | 7,251.28
 ---------------------------------------------------------------
 
+2.
+-----------------------------------
+Ranking of Profitable Categories
+-----------------------------------
+
+-- This is an expansion of request 4 above by adding a Rank Partition.
+
+SELECT
+	RankTable.RankPerCategory,
+	sd.Category,
+    sd.SubCategory,
+    FORMAT(SUM(Sales),2) AS TotalSales,
+    FORMAT(SUM(Quantity),2) AS TotalQuantity
+FROM superstore_dataset AS sd
+JOIN (
+	SELECT
+		RANK() OVER(PARTITION BY Category ORDER BY SUM(Sales) DESC) AS RankPerCategory,
+        Category,
+        SubCategory
+	FROM superstore_dataset
+    GROUP BY Category, SubCategory
+) AS RankTable
+	ON RankTable.Category=sd.Category
+		AND RankTable.SubCategory=sd.SubCategory
+GROUP BY RankTable.RankPerCategory, sd.Category, SubCategory
+ORDER BY Category ASC
+------------------------------------------------------------------------------------------------------
+
+Explanation:
+- This query identifies the most profitable SubCategories of each Category by calculating the total profit for each, then ranks by the highest total profit of each sub category and total quantiy sold.
+- The JOIN table uses the RANK() Window Function to find the most profitable sub category by partitioning by the Category and being ordered by SUM(Sales) DESC.
+- There are two SELF JOINS between the inner query and the outer query, so the query knows that the two columns are the same in both the inner and outer query.
+
+----------------------
+Result-Set
+-------------------------------------------------------------------------------
+StateRank | Category         | SubCategory   | TotalSales   | TotalQuantity
+-------------------------------------------------------------------------------
+1         | Furniture         | Chairs        | 328,449.13   | 2,356
+2         | Furniture         | Tables        | 206,965.68   | 1,241
+3         | Furniture         | Bookcases     | 114,880.05   | 868
+4         | Furniture         | Furnishings   | 82,752.20    | 3,390
+1         | Office Supplies   | Storage       | 216,803.20   | 3,065
+2         | Office Supplies   | Binders       | 199,905.72   | 5,614
+3         | Office Supplies   | Appliances    | 107,532.14   | 1,729
+4         | Office Supplies   | Paper         | 75,356.16    | 4,811
+5         | Office Supplies   | Supplies      | 45,952.45    | 590
+6         | Office Supplies   | Art           | 27,118.80    | 3,000
+7         | Office Supplies   | Envelopes     | 15,339.47    | 880
+8         | Office Supplies   | Labels        | 12,486.30    | 1,400
+9         | Office Supplies   | Fasteners     | 3,008.63     | 901
+1         | Technology        | Phones        | 327,230.27   | 3,190
+2         | Technology        | Machines      | 189,238.68   | 440
+3         | Technology        | Accessories   | 167,380.31   | 2,976
+4         | Technology        | Copiers       | 149,528.01   | 234
+-------------------------------------------------------------------------------
+
 
 
 
