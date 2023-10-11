@@ -11,7 +11,6 @@ Feel free to look around and [reach out](https://www.linkedin.com/in/sabastian-m
   
 * **Sales Data Analysis** - [SQL](https://github.com/SabastianMoselle/SQL-Portfolio/blob/main/Sales_Dataset): In this project, I focused more on Window Functions and Self Joins when analyzing the sales data. Using Window Functions and Self Joins to analyze percentage differences between current revenue and previous revenue, determining the individual average and the overall average for the product categorys, calculating the cumulative quantity across the months and the total quantity for each month, and more.
 
-
-<!-- ### Health Data Dashboard - [Tableau Dashboard](https://public.tableau.com/views/HealthcareData_16949079292280/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link)
+ ### Health Data Dashboard - [Tableau Dashboard](https://public.tableau.com/views/HealthcareData_16949079292280/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link)
 * **Data**: Health Sample Data
-* **Audience**: Hospital Administrators and Executives -->
+* **Audience**: Hospital Administrators and Executives
